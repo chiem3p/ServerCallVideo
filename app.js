@@ -46,7 +46,7 @@ function ioCallback(socket) {
   socket.on('join', (roomID, callback) => {
     console.log('join', roomID);
     
-    let socketIds = socketIdsInRoom(roomID);
+    const socketIds = socketIdsInRoom(roomID);
     console.log(socketIds);
     
     callback(socketIds);
@@ -58,7 +58,7 @@ function ioCallback(socket) {
     console.log('exchange', data.to);
     
     data.from = socket.id;
-    let to = io.sockets.connected[data.to];
+    const to = io.sockets.connected[data.to];
     to.emit('exchange', data);
   });
   
@@ -79,10 +79,10 @@ function ioCallback(socket) {
  Socket Functions
  ================================ */
 function socketIdsInRoom(roomID) {
-  let socketIds = io.nsps['/'].adapter.rooms[roomID];
+  const socketIds = io.nsps['/'].adapter.rooms[roomID];
   if (socketIds) {
-    let collection = [];
-    for (let key in socketIds) {
+    const collection = [];
+    for (const key in socketIds) {
       collection.push(key);
     }
     return collection;
