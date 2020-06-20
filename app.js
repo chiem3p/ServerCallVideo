@@ -6,7 +6,6 @@ const options = {
   key: fs.readFileSync('./fake-keys/privatekey.pem'),
   cert: fs.readFileSync('./fake-keys/certificate.pem'),
 };
-const serverPort = (process.env.PORT || 4443);
 const https = require('https');
 const http = require('http');
 var server;
@@ -23,8 +22,9 @@ console.log(process.env.LOCAL);
 app.use(express.static(__dirname + '/public'));
 app.get('/', getCallback);
 io.on('connection', ioCallback);
-server.listen(serverPort, listenCallback);
-
+server.listen(process.env.PORT||4443,()=>{
+	console.log('server is runing')
+})
 /* ==============================
  Middleware Functions
  ================================ */
@@ -33,12 +33,7 @@ function getCallback(req, res) {
   res.sendFile(__dirname + '/index.html');
 }
 
-function listenCallback() {
-  console.log('server up and running at %s port', serverPort);
-  if (process.env.LOCAL) {
-    open('https://localhost:' + serverPort);
-  }
-}
+
 
 function ioCallback(socket) {
   console.log(`Socket id: ${socket.id}`);
