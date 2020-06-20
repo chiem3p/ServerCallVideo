@@ -66,7 +66,7 @@ function ioCallback(socket) {
     console.log('disconnect');
     
     if (socket.room) {
-      let room = socket.room;
+      const room = socket.room;
       io.to(room).emit('leave', socket.id);
       socket.leave(room);
       
