@@ -9,7 +9,7 @@ const options = {
 const serverPort = (process.env.PORT || 4443);
 const https = require('https');
 const http = require('http');
-let server;
+const server;
 if (process.env.LOCAL) {
   server = https.createServer(options, app);
 } else {
