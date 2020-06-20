@@ -9,14 +9,14 @@ const options = {
 const serverPort = (process.env.PORT || 4443);
 const https = require('https');
 const http = require('http');
-const server;
+var server;
 if (process.env.LOCAL) {
   server = https.createServer(options, app);
 } else {
   server = http.createServer(app);
 }
 const io = require('socket.io')(server);
-
+console.log(process.env.LOCAL);
 /* ==============================
  Middleware
  ================================ */
